@@ -3,6 +3,7 @@ import { getGreeting, getRandomQuoteInfo } from '../apiClient.ts'
 import { useQuery } from '@tanstack/react-query'
 
 const Quote = () => {
+
   //get random quote ("get quote" button generates quote)
   //display quote 
   //user input form -done!
@@ -44,6 +45,7 @@ const Quote = () => {
 
   return (
     <>
+    <div className="quote-card">
       {/* {count}
       <h1 className="text-3xl font-bold underline">{greeting}</h1>
       {isError && (
@@ -51,7 +53,7 @@ const Quote = () => {
           There was an error retrieving the greeting.
         </p>
       )} */}
-      <button onClick={handleGetQuote}>Get Quote</button>
+      <button className="get-quote-btn" onClick={handleGetQuote}>Get Quote</button>
       <p>{quote.quote}</p>
       <h2>Who said that? </h2>   
       <form onSubmit={handleSubmit}>
@@ -61,6 +63,7 @@ const Quote = () => {
         <button type = "submit">Check Answer</button>
       </form>
       <p></p>
+      </div>
     
     </>
   )

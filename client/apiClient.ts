@@ -10,8 +10,8 @@ export async function getGreeting() {
 export async function getRandomQuoteInfo(){
   //hardcoded answer
   //returns quote and character?
-  const res = await request.get(`${rootURL}/`)
-  return res.body as quoteInfo
-  // return{character: 'Gollum',
-  //   quote: 'The Precious',} as quoteInfo
+  // const res = await request.get(`${rootURL}/`)
+  // return res.body as quoteInfo
+  return{character: 'Gollum',
+    quote: 'The Precious',} as quoteInfo
 }
