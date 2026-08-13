@@ -2,7 +2,13 @@ import { useState } from 'react'
 import { getGreeting } from '../apiClient.ts'
 import { useQuery } from '@tanstack/react-query'
 
-const Home = () => {
+const Quote = () => {
+  //get random quote ("get quote" button generates quote)
+  //display quote 
+  //user input form
+  //submit button checks input against answer (hardcoded)
+  //get answer from API query
+
   const [count, setCount] = useState(0)
 
   const {
@@ -27,4 +33,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Quote
