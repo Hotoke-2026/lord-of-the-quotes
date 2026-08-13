@@ -12,4 +12,6 @@ export async function getRandomQuoteInfo(){
   //returns quote and character?
   const res = await request.get(`${rootURL}/quoteinfo`)
   return res.body as quoteInfo
+  // return{character: 'Gollum',
+  //   quote: 'The Precious',} as quoteInfo
 }
