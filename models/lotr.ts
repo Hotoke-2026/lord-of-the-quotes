@@ -1,4 +1,4 @@
-export interface quoteInfo{
+export interface QuoteInfo{
   character: string
   quote: string
 }
