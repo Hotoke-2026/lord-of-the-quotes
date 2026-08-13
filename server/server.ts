@@ -1,14 +1,29 @@
 import * as Path from 'node:path'
 import express from 'express'
 import cors, { CorsOptions } from 'cors'
+import {getQuotes, getCharacterById} from './ExternalApiClient'
+import type { ExternalAPICharacter, ExternalAPICharacters, ExternalAPIQuote, ExternalAPIQuotes, quoteInfo} from '../models/lotr.ts'
 
 const server = express()
 
-server.get('/api/v1/greeting', (req, res) => {
-  const greetings = ['hola', 'hi', 'hello', 'howdy']
-  const index = Math.floor(Math.random() * greetings.length)
-  console.log(index)
-  res.json({ greeting: greetings[index] })
+server.get('/api/v1/quoteinfo', async (req, res) => {
+  try {
+    const quotes = await getQuotes()
+    console.log('Quotes from API:', quotes)
+    const randomQuote = quotes.docs[Math.floor(Math.random() * quotes.docs.length)]
+    console.log('Random Quote:', randomQuote)
+    const characterFromQuote = await getCharacterById(randomQuote.character) as ExternalAPICharacters
+    const characterNameFromQuote = characterFromQuote.docs[0].name
+    res.json({ quote: randomQuote.dialog, character: characterNameFromQuote } as quoteInfo)
+
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ error: error.message })
+    } else {
+      res.status(500).json({ error: 'An unknown server error has occurred' })
+    }
+  }
+  
 })
 
 server.use(express.json())
