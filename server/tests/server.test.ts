@@ -4,7 +4,7 @@ import server from '../server';
 import nock from 'nock';
 
 
-nock('https://the-one-api.dev').get('/v2/quote').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, {
+const quoteResponse = {
     "docs": [
         {
             "_id": "5cd96e05de30eff6ebcce7e9",
@@ -26,8 +26,9 @@ nock('https://the-one-api.dev').get('/v2/quote').matchHeader('authorization', `B
     "offset": 0,
     "page": 1,
     "pages": 1192
-})
-nock('https://the-one-api.dev').get('/v2/character/5cd99d4bde30eff6ebccfe9e').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, {
+}
+
+const characterResponse = {
     "docs": [
         {
             "_id": "5cd99d4bde30eff6ebccfe9e",
@@ -48,20 +49,20 @@ nock('https://the-one-api.dev').get('/v2/character/5cd99d4bde30eff6ebccfe9e').ma
     "offset": 0,
     "page": 1,
     "pages": 1
-})
+}
+
+nock('https://the-one-api.dev').get('/v2/quote').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, quoteResponse)
+nock('https://the-one-api.dev').get('/v2/character/5cd99d4bde30eff6ebccfe9e').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, characterResponse)
 
 
 
 describe('GET /api/v1/quoteinfo', () => {
   it('should return a 200 status code, and have a quote property and character property', async () => {
+    nock('https://the-one-api.dev').get('/v2/quote').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, quoteResponse)
+    nock('https://the-one-api.dev').get('/v2/character/5cd99d4bde30eff6ebccfe9e').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, characterResponse)
     const response = await supertest(server).get('/api/v1/quoteinfo');
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('quote');
     expect(response.body).toHaveProperty('character');
   });
-  /*it('should return a JSON object with quote and character properties', async () => {
-    const response = await supertest(server).get('/api/v1/quoteinfo');
-    console.log('Response body:', response.body);
-    
-  });*/
 });
