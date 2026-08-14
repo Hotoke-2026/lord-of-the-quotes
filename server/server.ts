@@ -14,7 +14,12 @@ server.get('/api/v1/quoteinfo', async (req, res) => {
     console.log('Random Quote:', randomQuote)
     const characterFromQuote = await getCharacterById(randomQuote.character) as ExternalAPICharacters
     const characterNameFromQuote = characterFromQuote.docs[0].name
-    res.json({ quote: randomQuote.dialog, character: characterNameFromQuote } as quoteInfo)
+    const quoteInfo: quoteInfo = {
+      character: characterNameFromQuote,
+      quote: randomQuote.dialog
+    }
+    console.log('Quote Info:', quoteInfo)
+    res.json(quoteInfo)
 
   } catch (error: unknown) {
     if (error instanceof Error) {
