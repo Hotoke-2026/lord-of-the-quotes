@@ -4,28 +4,14 @@ import { useQuery } from '@tanstack/react-query'
 
 const Quote = () => {
 
-  //get random quote ("get quote" button generates quote)
-  //display quote 
-  //user input form -done!
-  //submit button checks input against answer (hardcoded)
-  //get answer from API query
-
-  const [count, setCount] = useState(0)
   const [characterAnswer, setCharacterAnswer] = useState("")
   const [quote, setQuote] = useState({ character: '', quote: ''})
-
-  // const {
-  //   data: greeting,
-  //   isError,
-  //   isPending,
-  // } = useQuery({ queryKey: ['greeting', count], queryFn: getGreeting })
-
-  // if (isPending) return <p>Loading...</p>
 
   const{
     data: quoteInfo,
     isError,
     isPending,
+    refetch,
   } = useQuery({queryKey: ['quote', 'character'], queryFn: getRandomQuoteInfo})
   if (isPending) return <p>Loading...</p>
   if(isError) return ('error')
@@ -44,8 +30,9 @@ const Quote = () => {
     else alert(`WRONG. Correct answer is: ${quoteInfo.character}`)
   }
 
-  async function handleGetQuote() {const data = await getRandomQuoteInfo()
-  setQuote(data)}
+  async function handleGetQuote() {
+    refetch()
+  }
 
   return (
     <>
@@ -53,7 +40,7 @@ const Quote = () => {
       {}
       <button className="get-quote-btn" onClick={handleGetQuote}>Get Quote</button>
       <div className="quote-box">
-        <p>{quote.quote}</p>
+        <p>{quoteInfo.quote}</p>
       </div>
       <h2 className="quote-label">Who said that? </h2>  
       <form onSubmit={handleSubmit}>

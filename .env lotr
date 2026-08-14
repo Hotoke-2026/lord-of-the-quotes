@@ -1,3 +1,4 @@
-API_KEY=
-API_HOST=
-PORT=
+API_KEY='adIbIHJ1TnZ9B4EnHQub'
+API_HOST='https://the-one-api.dev/v2/'
+PORT=3000
+

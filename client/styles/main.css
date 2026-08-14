@@ -2,64 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-.quote-card {
-  max-width: 320px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 1px solid #333;
-  border-radius: 4px;
-  text-align: center;
-  font-family: sans-serif;
+body {
+  background-color: #654321;
+  margin: 0;
+}
 
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .quote-title {
-  font-size: 1.3rem;
+  font-family: 'Aniron', 'Albertus Extra Bold', 'Times New Roman', serif;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3rem;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  color: #fee62b;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.quote-card {
+  max-width: 960px;
+  width: 90%;
+  min-height: 70vh;
+  padding: 60px;
+  border: 4px double #7a5230;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Times New Roman', serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f4e9d8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .get-quote-btn {
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  border: 1px solid #333;
-  border-radius: 4px;
-  background: white;
+  align-self: center;
+  font-size: 1rem;
+  padding: 10px 24px;
+  border: 2px solid #7a5230;
+  border-radius: 6px;
+  background: #c9a86a;
+  color: #3b2410;
+  font-weight: bold;
   cursor: pointer;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  transition: background 0.2s ease;
+}
+
+.get-quote-btn:hover {
+  background: #b8945a;
 }
 
 .quote-label {
-  test-align: left;
+  text-align: center;
+  font-size: 1.3rem;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  color: #4b2e05;
 }
 
 .quote-box {
   position: relative;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 16px;
-  margin-bottom: 16px;
-  min-height: 60px;
+  border: 2px solid #7a5230;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: white;
+  font-style: italic;
+  font-size: 1.2rem;
 }
 
 .answer-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+}
+
+.answer-input {
+  border: 2px solid #7a5230;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 1rem;
 }
 
 .submit-btn {
-  border: 1px solid #333;
+  align-self: center;
+  border: 2px solid #7a5230;
   border-radius: 999px;
-  padding: 6px 20px;
-  background: white;
+  padding: 10px 28px;
+  background: #c9a86a;
+  color: #3b2410;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #a37833;
 }
 
 .feedback-overlay {
