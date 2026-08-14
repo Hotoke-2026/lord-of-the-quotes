@@ -1,16 +1,18 @@
 import * as Path from 'node:path'
 import express from 'express'
 import cors, { CorsOptions } from 'cors'
-import {getQuotes, getCharacterById} from './ExternalApiClient'
+import {getQuotes, getCharacterById, getRandomQuote} from './ExternalApiClient'
 import type { ExternalAPICharacter, ExternalAPICharacters, ExternalAPIQuote, ExternalAPIQuotes, quoteInfo} from '../models/lotr.ts'
 
 const server = express()
 
 server.get('/api/v1/quoteinfo', async (req, res) => {
   try {
-    const quotes = await getQuotes()
+    /*const quotes = await getQuotes()
     console.log('Quotes from API:', quotes)
     const randomQuote = quotes.docs[Math.floor(Math.random() * quotes.docs.length)]
+    console.log('Random Quote:', randomQuote)*/
+    const randomQuote = await getRandomQuote() as ExternalAPIQuote
     console.log('Random Quote:', randomQuote)
     const characterFromQuote = await getCharacterById(randomQuote.character) as ExternalAPICharacters
     const characterNameFromQuote = characterFromQuote.docs[0].name
