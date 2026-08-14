@@ -5,27 +5,11 @@ import nock from 'nock';
 
 
 const quoteResponse = {
-    "docs": [
-        {
-            "_id": "5cd96e05de30eff6ebcce7e9",
-            "dialog": "Deagol!!",
-            "movie": "5cd95395de30eff6ebccde5d",
-            "character": "5cd99d4bde30eff6ebccfe9e",
-            "id": "5cd96e05de30eff6ebcce7e9"
-        },
-        {
-            "_id": "5cd96e05de30eff6ebcce7ea",
-            "dialog": "Deagol!",
-            "movie": "5cd95395de30eff6ebccde5d",
-            "character": "5cd99d4bde30eff6ebccfe9e",
-            "id": "5cd96e05de30eff6ebcce7ea"
-        }
-    ],
-    "total": 2383,
-    "limit": 2,
-    "offset": 0,
-    "page": 1,
-    "pages": 1192
+    "_id": "5cd96e05de30eff6ebcceb3f",
+    "dialog": "Let them come!",
+    "movie": "5cd95395de30eff6ebccde5b",
+    "character": "5cd99d4bde30eff6ebccfe9e",
+    "id": "5cd96e05de30eff6ebcceb3f"
 }
 
 const characterResponse = {
@@ -51,7 +35,7 @@ const characterResponse = {
     "pages": 1
 }
 
-nock('https://the-one-api.dev').get('/v2/quote').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, quoteResponse)
+nock('https://the-one-api.dev').get('/v2/quotes/random').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, quoteResponse)
 nock('https://the-one-api.dev').get('/v2/character/5cd99d4bde30eff6ebccfe9e').matchHeader('authorization', `Bearer ${process.env.API_KEY}`).reply(200, characterResponse)
 
 

@@ -18,3 +18,9 @@ export async function getCharacterById(id:string): Promise<ExternalAPICharacters
     .set('Authorization', `Bearer ${API_KEY}`)
   return req.body
 }
+
+export async function getRandomQuote(): Promise<ExternalAPIQuote> {
+  const req = await superagent.get(`${API_HOST}quotes/random`)
+    .set('Authorization', `Bearer ${API_KEY}`)
+  return req.body
+}
