@@ -3,8 +3,8 @@ import { Outlet } from 'react-router'
 function App() {
 
   return (
-    <div>
-      <h1>Lord of the Quotes</h1>
+    <div className="page-wrapper">
+      <h1 className="quote-title">Lord of the Quotes</h1>
       <Outlet />
       
     </div>
