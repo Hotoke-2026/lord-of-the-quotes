@@ -1,8 +1,8 @@
-export interface QuoteInfo{
+export interface QuoteInfo {
   character: string
+  characterId: string
   quote: string
 }
-
 
 
 //// Interfaces for External API

@@ -9,13 +9,14 @@ const server = express()
 server.get('/api/v1/quoteinfo', async (req, res) => {
   try {
     const quotes = await getQuotes()
-    console.log('Quotes from API:', quotes)
     const randomQuote = quotes.docs[Math.floor(Math.random() * quotes.docs.length)]
-    console.log('Random Quote:', randomQuote)
     const characterFromQuote = await getCharacterById(randomQuote.character) as ExternalAPICharacters
     const characterNameFromQuote = characterFromQuote.docs[0].name
-    res.json({ quote: randomQuote.dialog, character: characterNameFromQuote } as quoteInfo)
-
+    res.json({
+      quote: randomQuote.dialog,
+      character: characterNameFromQuote,
+      characterId: randomQuote.character,
+    } as quoteInfo)
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ error: error.message })
@@ -23,7 +24,19 @@ server.get('/api/v1/quoteinfo', async (req, res) => {
       res.status(500).json({ error: 'An unknown server error has occurred' })
     }
   }
-  
+})
+
+server.get('/api/v1/character/:id', async (req, res) => {
+  try {
+    const characterData = await getCharacterById(req.params.id) as ExternalAPICharacters
+    res.json(characterData.docs[0])
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ error: error.message })
+    } else {
+      res.status(500).json({ error: 'An unknown server error has occurred' })
+    }
+  }
 })
 
 server.use(express.json())

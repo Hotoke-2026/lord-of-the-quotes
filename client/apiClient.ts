@@ -13,3 +13,8 @@ export async function getRandomQuoteInfo(){
   return res.body as quoteInfo
 
 }
+
+export async function getCharacterDetails(id: string) {
+  const res = await request.get(`${rootURL}/character/${id}`)
+  return res.body
+}
