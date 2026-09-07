@@ -1,3 +1,4 @@
+import { checkAnswer } from '../checkAnswer.ts'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { getRandomQuoteInfo } from '../apiClient.ts'
@@ -22,16 +23,17 @@ const Quote = () => {
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
-    if (characterAnswer === quoteInfo.character) {
-      navigate(`/character/${quoteInfo.characterId}`)
-    } else if (characterAnswer === 'Jimothy') {
-      alert('Jimothy is not a Lord of The Rings Character, he is a raccoon with a congenital spine deformity')
-    } else {
-      alert(`WRONG. Correct answer is: ${quoteInfo.character}`)
-    }
-  }
+  e.preventDefault()
+  const result = checkAnswer(characterAnswer, quoteInfo.character)
 
+  if (result === 'correct') {
+    navigate(`/character/${quoteInfo.characterId}`)
+  } else if (result === 'jimothy') {
+    alert('Jimothy is not a Lord of The Rings Character, he is a raccoon with a congenital spine deformity')
+  } else {
+    alert(`WRONG. Correct answer is: ${quoteInfo.character}`)
+  }
+}
   return (
     <div className="quote-card">
       <button className="get-quote-btn" onClick={() => refetch()}>Get Quote</button>
